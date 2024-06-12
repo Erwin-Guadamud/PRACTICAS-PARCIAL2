@@ -1,21 +1,19 @@
-
-
 export class CreateControlrealizadoDto {
 
   private constructor(
-    public readonly texto: string,
+    public readonly fecha: Date,
+    public readonly hora: Date,
+    public readonly valor: number,
+    public readonly estado: string,
   ){}
 
 
   static create( props: {[key:string]: any} ): [string?, CreateControlrealizadoDto?]  {
 
-    const { texto } = props;
+    const { fecha, hora, valor, estado } = props;
 
-    if ( !texto ) return ['Nombre property is required', undefined];
+    if (!fecha || !hora || !valor || !estado) return ['Fecha, hora, valor, and estado properties are required', undefined];
 
-
-    return [undefined, new CreateControlrealizadoDto(texto)];
+    return [undefined, new CreateControlrealizadoDto(fecha, hora, valor, estado)];
   }
-
-
 }

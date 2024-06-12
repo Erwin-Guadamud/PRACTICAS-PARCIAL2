@@ -13,12 +13,12 @@ export class ControlrealizadoRoutes {
     const controlrealizadoRepository = new ControlrealizadoRepositoryImpl(datasource);
     const controlrealizadoController = new ControlrealizadosController(controlrealizadoRepository);
 
-    router.get('/', controlrealizadoController.getControlrealizados);
+    router.get('/', controlrealizadoController.getControlrealizado);
     router.get('/:id', controlrealizadoController.getControlrealizadoById);
     
     router.post('/', controlrealizadoController.createControlrealizado);
     router.put('/:id', controlrealizadoController.updateControlrealizado);
-    router.delete('/:id', controlrealizadoController.deleteControlrealizado);
+    router.delete('/:id', controlrealizadoController.getControlrealizado);
 
     return router;
   }

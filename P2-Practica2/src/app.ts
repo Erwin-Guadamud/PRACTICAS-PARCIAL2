@@ -1,22 +1,20 @@
-import { envs } from './config/envs';
-import { AppRoutes } from './presentation/routes';
-import { Server } from './presentation/server';
+import server from 'express';
+import cors from 'cors'; // Importa el paquete cors
+import { Paciente, SignoVital, ControlRealizado, conexion } from './routes';
 
+const app = server();
 
+// Habilita CORS
+app.use(cors());
 
+app.use(server.json());
 
-(async()=> {
-  main();
-})();
+// Aquí puedes configurar tus rutas
+app.use('/pacientes', Paciente);
+app.use('/signovital', SignoVital);
+app.use('/controlrealizado', ControlRealizado);
+app.use('/conexion', conexion);
 
-
-function main() {
-
-  const server = new Server({
-    port: envs.PORT,
-    public_path: envs.PUBLIC_PATH,
-    routes: AppRoutes.routes,
-  });
-
-  server.start();
-}
+app.listen(3000, () => {
+    console.log('Server is running on port 3000');
+});

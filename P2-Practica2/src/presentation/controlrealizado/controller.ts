@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
-import { prisma } from '../../data/postgres';
 import { CreateControlrealizadoDto, UpdateControlrealizadoDto } from '../../domain/dtos';
-import { CreateControlrealizado, DeleteControlrealizado, GetControlrealizado, GetControlrealizados, ControlrealizadoRepository, UpdateControlrealizado } from '../../domain';
+import { ControlrealizadoRepository } from '../../domain';
 
 export class ControlrealizadosController {
 
@@ -10,55 +9,36 @@ export class ControlrealizadosController {
     private readonly controlrealizadoRepository: ControlrealizadoRepository,
   ) { }
 
-  public getControlrealizados = ( req: Request, res: Response ) => {
-    new GetControlrealizados( this.controlrealizadoRepository )
-      .execute()
-      .then( (todos: any) => res.json( todos ) )
-      .catch( (error: any) => res.status( 400 ).json( { error } ) );
-
+  public getControlrealizado = async ( req: Request, res: Response ) => {
+    const controlrealizado = await this.controlrealizadoRepository.getAll();
+    return res.json( controlrealizado );
   };
 
-  public getControlrealizadoById = ( req: Request, res: Response ) => {
+  public getControlrealizadoById = async ( req: Request, res: Response ) => {
     const id = +req.params.id;
 
-    new GetControlrealizado( this.controlrealizadoRepository )
-      .execute( id )
-      .then( (todo: any) => res.json( todo ) )
-      .catch( (error: any) => res.status( 400 ).json( { error } ) );
-
+    try {
+      const controlrealizado = await this.controlrealizadoRepository.findById( id );
+      res.json( controlrealizado );
+    } catch ( error ) {
+      res.status( 400 ).json( { error } );
+    }
   };
 
-  public createControlrealizado = ( req: Request, res: Response ) => {
+  public createControlrealizado = async ( req: Request, res: Response ) => {
     const [ error, createControlrealizadoDto ] = CreateControlrealizadoDto.create( req.body );
     if ( error ) return res.status( 400 ).json( { error } );
 
-    new CreateControlrealizado( this.controlrealizadoRepository )
-      .execute( createControlrealizadoDto! )
-      .then( controlrealizado => res.json( controlrealizado ) )
-      .catch( error => res.status( 400 ).json( { error } ) );
-
+    const todo = await this.controlrealizadoRepository.create( createControlrealizadoDto! );
+    res.json( todo );
   };
 
-  public updateControlrealizado = ( req: Request, res: Response ) => {
+  public updateControlrealizado = async ( req: Request, res: Response ) => {
     const id = +req.params.id;
-    const [ error, updateTodoDto ] = UpdateControlrealizadoDto.create( { ...req.body, id } );
+    const [ error, updateControlrealizadoDto ] = UpdateControlrealizadoDto.create( { ...req.body, id } );
     if ( error ) return res.status( 400 ).json( { error } );
 
-    new UpdateControlrealizado( this.controlrealizadoRepository )
-      .execute( updateTodoDto! )
-      .then( todo => res.json( todo ) )
-      .catch( error => res.status( 400 ).json( { error } ) );
-
+    const updatedControlrealizado = await this.controlrealizadoRepository.updateById( updateControlrealizadoDto! );
+    return res.json( updatedControlrealizado );
   };
-
-  public deleteControlrealizado = ( req: Request, res: Response ) => {
-    const id = +req.params.id;
-
-    new DeleteControlrealizado( this.controlrealizadoRepository )
-      .execute( id )
-      .then( todo => res.json( todo ) )
-      .catch( error => res.status( 400 ).json( { error } ) );
-
-  };
-
 }

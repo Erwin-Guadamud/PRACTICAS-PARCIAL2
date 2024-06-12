@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { PacientesController } from './controller';
+import { PacienteController } from './controller';
 import { PacienteDatasourceImpl } from '../../infrastructure/datasource/paciente.datasource.impl';
 import { PacienteRepositoryImpl } from '../../infrastructure/repositories/paciente.repository.impl';
 
@@ -11,14 +11,14 @@ export class PacienteRoutes {
 
     const datasource = new PacienteDatasourceImpl();
     const pacienteRepository = new PacienteRepositoryImpl(datasource);
-    const pacienteController = new PacientesController(pacienteRepository);
+    const pacienteController = new PacienteController(pacienteRepository);
 
-    router.get('/', pacienteController.getPacientes);
+    router.get('/', pacienteController.getPaciente);
     router.get('/:id', pacienteController.getPacienteById);
     
     router.post('/', pacienteController.createPaciente);
     router.put('/:id', pacienteController.updatePaciente);
-    router.delete('/:id', pacienteController.deletePaciente);
+    router.delete('/:id', pacienteController.getPaciente);
 
     return router;
   }

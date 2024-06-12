@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { SignovitalsController } from './controller';
+import { SignovitalController } from './controller';
 import { SignovitalDatasourceImpl } from '../../infrastructure/datasource/signovital.datasource.impl';
 import { SignovitalRepositoryImpl } from '../../infrastructure/repositories/signovital.repository.impl';
 
@@ -11,14 +11,14 @@ export class SignovitalRoutes {
 
     const datasource = new SignovitalDatasourceImpl();
     const signovitalRepository = new SignovitalRepositoryImpl(datasource);
-    const signovitalController = new SignovitalsController(signovitalRepository);
+    const signovitalController = new SignovitalController(signovitalRepository);
 
-    router.get('/', signovitalController.getSignovitals);
+    router.get('/', signovitalController.getSignovital);
     router.get('/:id', signovitalController.getSignovitalById);
     
     router.post('/', signovitalController.createSignovital);
     router.put('/:id', signovitalController.updateSignovital);
-    router.delete('/:id', signovitalController.deleteSignovital);
+    router.delete('/:id', signovitalController.getSignovital);
 
     return router;
   }
