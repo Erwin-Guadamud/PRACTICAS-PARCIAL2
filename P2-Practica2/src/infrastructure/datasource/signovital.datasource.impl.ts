@@ -16,7 +16,7 @@ export class SignovitalDatasourceImpl implements SignovitalDatasource {
 
   async getAll(): Promise<SignovitalEntity[]> {
     const signovital = await prisma.signovital.findMany();
-    return signovital.map( signovital => SignovitalEntity.fromObject(signovital) );
+    return signovital.map( (signovital: { [key: string]: any; }) => SignovitalEntity.fromObject(signovital) );
   }
 
   async findById( id: number ): Promise<SignovitalEntity> {

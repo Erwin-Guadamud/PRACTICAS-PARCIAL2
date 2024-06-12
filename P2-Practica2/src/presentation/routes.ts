@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { CiudadanoRoutes } from './ciudadanos/routes';
+import { PacienteRoutes } from './paciente/routes';
 
 
 
@@ -12,7 +12,7 @@ export class AppRoutes {
 
     const router = Router();
 
-    router.use('/api/ciudadanos', CiudadanoRoutes.routes );
+    router.use('/api/paciente', PacienteRoutes.routes );
     
     return router;
   }

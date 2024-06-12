@@ -16,7 +16,7 @@ export class PacienteDatasourceImpl implements PacienteDatasource {
 
   async getAll(): Promise<PacienteEntity[]> {
     const paciente = await prisma.paciente.findMany();
-    return paciente.map( paciente => PacienteEntity.fromObject(paciente) );
+    return paciente.map( (paciente: { [key: string]: any; }) => PacienteEntity.fromObject(paciente) );
   }
 
   async findById( id: number ): Promise<PacienteEntity> {

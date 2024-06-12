@@ -42,7 +42,7 @@ export class Server {
 
 
     //* SPA
-    this.app.get('*', (req, res) => {
+    this.app.get('*', (_req: any, res: { sendFile: (arg0: string) => void; }) => {
       const indexPath = path.join( __dirname + `../../../${ this.publicPath }/index.html` );
       res.sendFile(indexPath);
     });

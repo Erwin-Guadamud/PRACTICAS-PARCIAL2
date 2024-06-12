@@ -16,7 +16,7 @@ export class ControlrealizadoDatasourceImpl implements ControlrealizadoDatasourc
 
   async getAll(): Promise<ControlrealizadoEntity[]> {
     const controlrealizado = await prisma.controlrealizado.findMany();
-    return controlrealizado.map( controlrealizado => ControlrealizadoEntity.fromObject(controlrealizado) );
+    return controlrealizado.map( (controlrealizado: { [key: string]: any; }) => ControlrealizadoEntity.fromObject(controlrealizado) );
   }
 
   async findById( id: number ): Promise<ControlrealizadoEntity> {
