@@ -3,7 +3,7 @@ import cors from 'cors';
 // Importa la función que deseas usar
 //import { fetchDataWithAxios as axios, fetchDataWithAxios } from './librerias.roues';
 // Si deseas cambiar a Ky, usa esta línea en su lugar:
-import { fetchDataWithKy as ky, fetchDataWithKy } from './librerias.roues';
+import { fetchDataWithKy as ky } from './librerias.roues';
 
 const app = express();
 app.use(cors());

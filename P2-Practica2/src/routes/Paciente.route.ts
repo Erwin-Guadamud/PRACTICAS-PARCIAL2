@@ -5,7 +5,7 @@ const router = Router();
 const prisma = new PrismaClient();
 
 // GET - Retrieve all Pacientes
-router.get("/", async (req, res) => {
+router.get("/", async (_req, res) => {
   try {
     const pacientes = await prisma.paciente.findMany();
     res.json(pacientes);

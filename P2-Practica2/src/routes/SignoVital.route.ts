@@ -5,7 +5,7 @@ const router = Router();
 const prisma = new PrismaClient();
 
 // Obtener todos los signos vitales
-router.get("/", async (req, res) => {
+router.get("/", async (_req, res) => {
   try {
     const signosVitales = await prisma.signoVital.findMany();
     res.json(signosVitales);
