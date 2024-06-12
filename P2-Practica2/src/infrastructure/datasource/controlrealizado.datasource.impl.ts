@@ -7,7 +7,7 @@ import { CreateControlrealizadoDto, ControlrealizadoDatasource , Controlrealizad
 export class ControlrealizadoDatasourceImpl implements ControlrealizadoDatasource {
 
   async create( createControlrealizadoDto: CreateControlrealizadoDto ): Promise<ControlrealizadoEntity> {
-    const controlrealizado = await prisma.controlrealizado.create({
+    const controlrealizado = await prisma.controlRealizado.create({
       data: createControlrealizadoDto!
     });
 
@@ -15,12 +15,12 @@ export class ControlrealizadoDatasourceImpl implements ControlrealizadoDatasourc
   }
 
   async getAll(): Promise<ControlrealizadoEntity[]> {
-    const controlrealizado = await prisma.controlrealizado.findMany();
+    const controlrealizado = await prisma.controlRealizado.findMany();
     return controlrealizado.map( (controlrealizado: { [key: string]: any; }) => ControlrealizadoEntity.fromObject(controlrealizado) );
   }
 
   async findById( id: number ): Promise<ControlrealizadoEntity> {
-    const controlrealizado = await prisma.controlrealizado.findFirst({
+    const controlrealizado = await prisma.controlRealizado.findFirst({
       where: { id }
     });
 
@@ -31,7 +31,7 @@ export class ControlrealizadoDatasourceImpl implements ControlrealizadoDatasourc
   async updateById( updateControlrealizadoDto: UpdateControlrealizadoDto ): Promise<ControlrealizadoEntity> {
     await this.findById( updateControlrealizadoDto.id );
     
-    const updatedControlrealizado = await prisma.controlrealizado.update({
+    const updatedControlrealizado = await prisma.controlRealizado.update({
       where: { id: updateControlrealizadoDto.id },
       data: updateControlrealizadoDto!.values
     });
@@ -41,7 +41,7 @@ export class ControlrealizadoDatasourceImpl implements ControlrealizadoDatasourc
 
   async deleteById( id: number ): Promise<ControlrealizadoEntity> {
     await this.findById( id );
-    const deleted = await prisma.controlrealizado.delete({
+    const deleted = await prisma.controlRealizado.delete({
       where: { id }
     });
 

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { prisma } from '../../data/postgres';
+//import { prisma } from '../../data/postgres';
 import { CreateControlrealizadoDto, UpdateControlrealizadoDto } from '../../domain/dtos';
 import { ControlrealizadoRepository } from '../../domain';
 

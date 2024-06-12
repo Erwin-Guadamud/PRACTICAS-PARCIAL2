@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { prisma } from '../../data/postgres';
+//import { prisma } from '../../data/postgres';
 import { CreateSignovitalDto, UpdateSignovitalDto } from '../../domain/dtos';
 import { SignovitalRepository } from '../../domain';
 

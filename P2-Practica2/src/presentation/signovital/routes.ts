@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { SignovitalController } from './controller';
+import { SignovitalController } from './controller.ddd';
 import { SignovitalDatasourceImpl } from '../../infrastructure/datasource/signovital.datasource.impl';
 import { SignovitalRepositoryImpl } from '../../infrastructure/repositories/signovital.repository.impl';
 

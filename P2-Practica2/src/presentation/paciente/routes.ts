@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { PacienteController } from './controller';
+import { PacienteController } from './controller.ddd';
 import { PacienteDatasourceImpl } from '../../infrastructure/datasource/paciente.datasource.impl';
 import { PacienteRepositoryImpl } from '../../infrastructure/repositories/paciente.repository.impl';
 
