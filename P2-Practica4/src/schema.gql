@@ -1,0 +1,98 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type SignoVital {
+  id: ID!
+  descripcion: String!
+  nivelMinimo: Int!
+  nivelMaximo: Int!
+  estado: String!
+  controles: [ControlRealizado!]
+}
+
+type ControlRealizado {
+  id: ID!
+  paciente: Paciente!
+  signoVital: SignoVital!
+  fecha: String!
+  hora: String!
+  valor: Int!
+  estado: String!
+}
+
+type Paciente {
+  id: ID!
+  nombre: String!
+  identificacion: String!
+  estado: String
+  controles: [ControlRealizado!]
+}
+
+type Query {
+  pacientes(estado: String): [Paciente!]!
+  paciente(id: Float!): Paciente!
+  signosVitales(estado: String): [SignoVital!]!
+  signoVital(id: Float!): SignoVital!
+  controlesRealizados(estado: String): [ControlRealizado!]!
+  controlRealizado(id: Float!): ControlRealizado!
+}
+
+type Mutation {
+  createPaciente(createPacienteInput: CreatePacienteInput!): Paciente!
+  updatePaciente(updatePacienteInput: UpdatePacienteInput!): Paciente!
+  removePaciente(id: Float!): Paciente!
+  createSignoVital(createSignoVitalInput: CreateSignoVitalInput!): SignoVital!
+  updateSignoVital(updateSignoVitalInput: UpdateSignoVitalInput!): SignoVital!
+  removeSignoVital(id: Float!): SignoVital!
+  createControlRealizado(createControlRealizadoInput: CreateControlRealizadoInput!): ControlRealizado!
+  updateControlRealizado(updateControlRealizadoInput: UpdateControlRealizadoInput!): ControlRealizado!
+  removeControlRealizado(id: Float!): ControlRealizado!
+}
+
+input CreatePacienteInput {
+  nombre: String!
+  identificacion: String!
+  estado: String = "activo"
+}
+
+input UpdatePacienteInput {
+  nombre: String
+  identificacion: String
+  estado: String = "activo"
+  id: ID!
+}
+
+input CreateSignoVitalInput {
+  descripcion: String!
+  nivelMinimo: Int!
+  nivelMaximo: Int!
+  estado: String = "activo"
+}
+
+input UpdateSignoVitalInput {
+  descripcion: String
+  nivelMinimo: Int
+  nivelMaximo: Int
+  estado: String = "activo"
+  id: ID!
+}
+
+input CreateControlRealizadoInput {
+  pacienteId: Int!
+  signoVitalId: Int!
+  fecha: String!
+  hora: String!
+  valor: Int!
+  estado: String = "activo"
+}
+
+input UpdateControlRealizadoInput {
+  pacienteId: Int
+  signoVitalId: Int
+  fecha: String
+  hora: String
+  valor: Int
+  estado: String = "activo"
+  id: ID!
+}
